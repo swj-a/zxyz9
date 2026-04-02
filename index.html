@@ -1,82 +1,82 @@
-<！doctype 超文本标记语言>
-<超文本标记语言 朗="zh-CN">
-<头>
-    <元 字符集="UTF-8">
-    <元 姓名="视口" 内容="宽度=设备宽度，初始比例=1.0">
-    <标题>高一九班 · 点名器双界面</标题>
-    <风格>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高一九班 · 点名器双界面</title>
+    <style>
         * {
-            边缘: 0;
-            填充: 0;
-            箱体尺寸: 边框框;
-            过渡: 所有 0.5s 缓解;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.5s ease;
         }
         
-        身体 {
-            背景色：#f8fafc；
-            颜色: #334155;
-            文本对齐: 中心;
-            顶部衬垫: 50PX;
-            最小高度: 100VH;
-            字体系列: 'Segoe UI', 宋体, 日内瓦, 韦尔达那, 无衬线;
-            过渡: 背景色 1s 缓解;
-            位置: 相对的;
-            overflow-x: 隐藏的;
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+            text-align: center;
+            padding-top: 50px;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 1s ease;
+            position: relative;
+            overflow-x: hidden;
         }
         
-        选取框 {
-            字体大小: 28PX;
-            字体粗细: 大胆的;
-            颜色：#1f2937；
-            文本阴影: 0 2PX 4PX RGBA(0, 0, 0, 0.1);
-            边缘: 20PX 0;
+        marquee {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1f2937;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
         }
         
-        H1 {
-            边缘: 15PX 0;
-            光标: 指针;
-            过渡: 改变 0.3s;
+        h1 {
+            margin: 15px 0;
+            cursor: pointer;
+            transition: transform 0.3s;
         }
         
-        H1:盘旋 {
-            改变: 规模(1.05);
+        h1:hover {
+            transform: scale(1.05);
         }
         
-        我 {
-            字体样式: 斜体;
-            显示: 块;
-            边缘: 15PX 0;
-            字体大小: 1.2他们;
+        i {
+            font-style: italic;
+            display: block;
+            margin: 15px 0;
+            font-size: 1.2em;
         }
         
         /* 原生卡片样式 */
-        .一个 {
-            宽度: 300PX;
-            背景色: RGBA(59, 130, 246, 0.5);
-            边缘: 20PX 自动;
-            边界半径: 20PX;
-            填充: 15PX 0;
-            箱形阴影: 0 4PX 8PX RGBA(0, 0, 0, 0.1);
-            过渡: 改变 0.3s;
+        .a {
+            width: 300px;
+            background-color: rgba(59, 130, 246, 0.5);
+            margin: 20px auto;
+            border-radius: 20px;
+            padding: 15px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
         }
         
-        .一个:盘旋 {
-            改变: translateY(-5PX);
-            箱形阴影: 0 6PX 12PX RGBA(0, 0, 0, 0.15);
+        .a:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
         /* 点名器入口按钮特殊样式 */
         .call-entry-btn {
-            光标: 指针;
-            背景: 线性梯度(135deg, RGBA(46, 125, 210, 0.7), RGBA(21, 101, 192, 0.8));
-            颜色: 白色的 ！重要;
-            文本阴影: 0 1PX 2PX RGBA(0,0,0,0.2);
-            边界半径: 20PX;
+            cursor: pointer;
+            background: linear-gradient(135deg, rgba(46, 125, 210, 0.7), rgba(21, 101, 192, 0.8));
+            color: white !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            border-radius: 20px;
         }
-        .call-entry-btn:盘旋 {
-            改变: 规模(1.02);
-            背景色: RGBA(25, 118, 210, 0.9);
-            箱形阴影: 0 10PX 20PX RGBA(0,0,0,0.2);
+        .call-entry-btn:hover {
+            transform: scale(1.02);
+            background-color: rgba(25, 118, 210, 0.9);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
         
         /* 点名器卡片样式 */
@@ -377,80 +377,80 @@
         }
         
         // 双击标题变色
-        ConstmainTitle=文件.querySelector('#mainTitle');
-        mainTitle.addEventListener('dblclick', ()=>{
-            ConstrandomHue=数学.floor(数学.随机() * 360);
-            Constsaturation=数学.floor(数学.随机() * 20)+40;
-            Constlightness=数学.floor(数学.随机() * 10)+85;
-            ConstrandomLightColor='hsl(${randomHue}, ${saturation}%, ${lightness}%)`;
-            文件.身体.风格.backgroundColor=randomLightColor;
-            文件.getElementById('colorValue').textContent=randomLightColor;
-            文件.getElementById('colorDisplay').风格.backgroundColor=randomLightColor;
+        const mainTitle = document.querySelector('#mainTitle');
+        mainTitle.addEventListener('dblclick', () => {
+            const randomHue = Math.floor(Math.random() * 360);
+            const saturation = Math.floor(Math.random() * 20) + 40;
+            const lightness = Math.floor(Math.random() * 10) + 85;
+            const randomLightColor = `hsl(${randomHue}, ${saturation}%, ${lightness}%)`;
+            document.body.style.backgroundColor = randomLightColor;
+            document.getElementById('colorValue').textContent = randomLightColor;
+            document.getElementById('colorDisplay').style.backgroundColor = randomLightColor;
         });
         
         // 悬停“懒得做了”显示反骨
-        ConstlazyText=文件.getElementById('lazyText');
-        ConstsecretMessage=文件.querySelector('.secret-message');
-        如果(lazyText && secretMessage) {
-            lazyText.addEventListener('mouseover', ()=>{
-                secretMessage.风格.显示='block';
+        const lazyText = document.getElementById('lazyText');
+        const secretMessage = document.querySelector('.secret-message');
+        if(lazyText && secretMessage) {
+            lazyText.addEventListener('mouseover', () => {
+                secretMessage.style.display = 'block';
             });
-            lazyText.addEventListener('mouseout', ()=>{
-                secretMessage.风格.显示='none';
+            lazyText.addEventListener('mouseout', () => {
+                secretMessage.style.display = 'none';
             });
         }
         
         // 键盘任意键文字抖动（仅主界面元素抖动更友好）
-        文件.addEventListener('keydown', (e)=>{
-            ConstallTexts=文件.querySelectorAll('#mainView h1, #mainView i, #mainView marquee, #mainView .a, #callerView .call-header, #callerView .called-name');
-            allTexts.forEach(text=>{
-                ConstrandomX=数学.随机() * 40 - 20;
-                ConstrandomY=数学.随机() * 40 - 20;
-                text.风格.改变='翻译(${randomX}px, ${randomY}px)`;
+        document.addEventListener('keydown', (e) => {
+            const allTexts = document.querySelectorAll('#mainView h1, #mainView i, #mainView marquee, #mainView .a, #callerView .call-header, #callerView .called-name');
+            allTexts.forEach(text => {
+                const randomX = Math.random() * 40 - 20;
+                const randomY = Math.random() * 40 - 20;
+                text.style.transform = `translate(${randomX}px, ${randomY}px)`;
             });
-            setTimeout(()=>{
-                allTexts.forEach(text=>{
-                    text.风格.改变='translate(0, 0)';
+            setTimeout(() => {
+                allTexts.forEach(text => {
+                    text.style.transform = 'translate(0, 0)';
                 });
             }, 500);
         });
         
         // 点击粒子特效（全局）
-        文件.身体.addEventListener('单击', (e)=>{
-            Constcolors=['#FF5252', '#FF4081', '#E040FB', '#7C4DFF', '#536DFE', '#448AFF', '#40C4FF', '#18FFFF', '#64FFDA', '#69F0AE', '#B2FF59', '#EEFF41'];
-            ConstparticleCount=18;
-            为 (让 我=0; 我 < particleCount; 我++) {
-                Constparticle=文件.createElement('div');
-                particle.classList.添加('粒子');
-                Constsize=数学.随机() * 12+3;
-                particle.风格.宽度=`${size}px`;
-                particle.风格.高度=`${size}px`;
-                Const颜色=colors[数学.floor(数学.随机() * colors.length)];
-                particle.风格.backgroundColor=颜色;
-                particle.风格.左=`${e.clientX}px`;
-                particle.风格.顶端=`${e.clientY}px`;
-                文件.身体.appendChild(particle);
-                Const角=数学.随机() * 数学.Pi * 2;
-                Constdistance=数学.随机() * 100+50;
-                Constx=数学.Cos(角) * distance;
-                Consty=数学.罪恶(角) * distance;
-                Constkeyframes=[
-                    { 改变: 'translate(0, 0) scale(1)', 不透明度: 1 },
-                    { 改变: '翻译(${x}px, ${y}PX)刻度(0.2)', 不透明度: 0 }
+        document.body.addEventListener('click', (e) => {
+            const colors = ['#FF5252', '#FF4081', '#E040FB', '#7C4DFF', '#536DFE', '#448AFF', '#40C4FF', '#18FFFF', '#64FFDA', '#69F0AE', '#B2FF59', '#EEFF41'];
+            const particleCount = 18;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                const size = Math.random() * 12 + 3;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.backgroundColor = color;
+                particle.style.left = `${e.clientX}px`;
+                particle.style.top = `${e.clientY}px`;
+                document.body.appendChild(particle);
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 100 + 50;
+                const x = Math.cos(angle) * distance;
+                const y = Math.sin(angle) * distance;
+                const keyframes = [
+                    { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+                    { transform: `translate(${x}px, ${y}px) scale(0.2)`, opacity: 0 }
                 ];
-                particle.使有生气(keyframes, { 持续: 数学.随机() * 1000+800, 缓和: 'cubic-bezier(0.1, 0.8, 0.3, 1)', 填满: '向前' }).onfinish=()=>{
-                    如果(particle.parentNode) particle.parentNode.removeChild(particle);
+                particle.animate(keyframes, { duration: Math.random() * 1000 + 800, easing: 'cubic-bezier(0.1, 0.8, 0.3, 1)', fill: 'forwards' }).onfinish = () => {
+                    if(particle.parentNode) particle.parentNode.removeChild(particle);
                 };
             }
         });
         
-        文件.getElementById('colorDisplay').风格.backgroundColor='#f8fafc';
-    </脚本>
-<脚本>
+        document.getElementById('colorDisplay').style.backgroundColor = '#f8fafc';
+    </script>
+    <script>
     // ========== 点名器独立逻辑（使用真实班级67人名单，不重复点名） ==========
-    (功能initCaller() {
+    (function initCaller() {
         // ----- 高一九班真实名单（共67人）-----
-        ConstnameList=[
+        const nameList = [
             "田海川", "王俊壕", "宋郑坤", "崔洪昊", "王湘砚", "杨锐锋", "毛虎臣", "田雨轩", "邹志涵", "聂子砚",
             "康峻玮", "雷佳烨", "肖雨田", "杨安妮", "孙文君", "黎伊淳", "宋莹慧", "杜宝月", "吕峻熙", "陈俊燃",
             "何欣玥", "李浩宇", "孔睿浩", "邓昌君", "杨佩馨", "刘博亚", "李艳丽", "闫开翎", "王梓轩", "刘子涵",
@@ -461,113 +461,111 @@
         ];
         
         // 构建学生数组（学号 1~67）
-        Conststudents=nameList.map((姓名, index)=>({
-            身份标识: index+1,
-            姓名: 姓名
+        const students = nameList.map((name, index) => ({
+            id: index + 1,
+            name: name
         }));
         
-        让calledStatus=new Array(67).填满(假的);
-        让remainCount=67;
+        let calledStatus = new Array(67).fill(false);
+        let remainCount = 67;
         
-        ConsttotalSpan=文件.getElementById('totalCount');
-        ConstremainSpan=文件.getElementById('remainCount');
-        ConstcalledNameDiv=文件.getElementById('calledName');
-        ConstcalledIdSpan=文件.getElementById('callasedId');
-        ConstcallBtn=文件.getElementById('callBtn');
-        ConstresetBtn=文件.getElementById('resetCallBtn');
-        ConstremainTipSpan=文件.getElementById('保留提示');
-        ConstresultArea=文件.getElementById('resultArea');
+        const totalSpan = document.getElementById('totalCount');
+        const remainSpan = document.getElementById('remainCount');
+        const calledNameDiv = document.getElementById('calledName');
+        const calledIdSpan = document.getElementById('calledId');
+        const callBtn = document.getElementById('callBtn');
+        const resetBtn = document.getElementById('resetCallBtn');
+        const remainTipSpan = document.getElementById('remainTip');
+        const resultArea = document.getElementById('resultArea');
         
-        功能updateStatsUI() {
-            如果(remainSpan) remainSpan.textContent=remainCount;
-            如果(remainTipSpan) {
-                如果 (remainCount===0) remainTipSpan.innerHTML='🎉 全班已点完！请按"重置状态"继续点名 🎉';
-                其他remainTipSpan.innerHTML='📌 剩余${remainCount}人未点名·不重复轮换‘；
+        function updateStatsUI() {
+            if(remainSpan) remainSpan.textContent = remainCount;
+            if(remainTipSpan) {
+                if (remainCount === 0) remainTipSpan.innerHTML = '🎉 全班已点完！请按「重置状态」继续点名 🎉';
+                else remainTipSpan.innerHTML = `📌 剩余 ${remainCount} 人未点名 · 不重复轮换`;
             }
         }
         
-        功能displayStudent(学生) {
-            如果(calledNameDiv) calledNameDiv.textContent=学生.姓名;
-            如果(calledIdSpan) calledIdSpan.innerHTML='📖 学号：${学生.身份标识}号·${学生.姓名}'；
-            如果(resultArea) {
-                resultArea.classList.移除('呼叫动画');
-                无效的resultArea.offsetWidth;
-                resultArea.classList.添加('呼叫动画');
+        function displayStudent(student) {
+            if(calledNameDiv) calledNameDiv.textContent = student.name;
+            if(calledIdSpan) calledIdSpan.innerHTML = `📖 学号：${student.id} 号  ·  ${student.name}`;
+            if(resultArea) {
+                resultArea.classList.remove('call-animate');
+                void resultArea.offsetWidth;
+                resultArea.classList.add('call-animate');
             }
-            如果(calledNameDiv) {
-                calledNameDiv.风格.改变="比例(1.02)";
-                setTimeout(()=>{ 如果(calledNameDiv) calledNameDiv.风格.改变="比例(1)"; }, 200);
+            if(calledNameDiv) {
+                calledNameDiv.style.transform = "scale(1.02)";
+                setTimeout(() => { if(calledNameDiv) calledNameDiv.style.transform = "scale(1)"; }, 200);
             }
         }
         
-        功能miniConfetti() {
-            如果(!resultArea) 返回;
-            Constrect=resultArea.getBoundingClientRect();
-            Constx=rect.左+rect.宽度/2;
-            康斯蒂=rect.顶端+rect.高度/2;
-            为(让我=0;我<12;我++) {
-                Constp=文件.createElement('div');
-                p.classList.添加('粒子');
-                Consts=数学.随机()*8+4;
-                p.风格.宽度=s+'px';
-                p.风格.高度=s+'px';
-                p.风格.backgroundColor='hsl(${数学.随机()*360}，75%，65%)'；
-                p.风格.左=(x+(数学.随机()-0.5)*40)+'px';
-                p.风格.顶端=(y+(数学.随机()-0.5)*40)+'px';
-                文件.身体.appendChild(p);
-                Const角=数学.随机()*数学.Pi*2;
-                ConstDist=数学.随机()*70+30;
-                ConstDX=数学.Cos(角)*Dist;
-                ConstDy=数学.罪恶(角)*Dist;
-                p.使有生气([{改变:'平移(0，0)小数位数(1)', 不透明度:0.9},{改变:'翻译(${DX}PX，${Dy}PX)刻度(0.2)', 不透明度:0}], {持续:600, 缓和:'轻松退出', 填满:'向前'}).onfinish=()=>p.移除();
+        function miniConfetti() {
+            if(!resultArea) return;
+            const rect = resultArea.getBoundingClientRect();
+            const x = rect.left + rect.width/2;
+            const y = rect.top + rect.height/2;
+            for(let i=0;i<12;i++) {
+                const p = document.createElement('div');
+                p.classList.add('particle');
+                const s = Math.random()*8+4;
+                p.style.width = s+'px';
+                p.style.height = s+'px';
+                p.style.backgroundColor = `hsl(${Math.random()*360}, 75%, 65%)`;
+                p.style.left = (x + (Math.random()-0.5)*40)+'px';
+                p.style.top = (y + (Math.random()-0.5)*40)+'px';
+                document.body.appendChild(p);
+                const angle = Math.random()*Math.PI*2;
+                const dist = Math.random()*70+30;
+                const dx = Math.cos(angle)*dist;
+                const dy = Math.sin(angle)*dist;
+                p.animate([{transform:'translate(0,0) scale(1)', opacity:0.9},{transform:`translate(${dx}px,${dy}px) scale(0.2)`, opacity:0}], {duration:600, easing:'ease-out', fill:'forwards'}).onfinish = () => p.remove();
             }
         }
-！doctype
-<功能callRandomStudent() {
-            如果 (remainCount===0) {
-                如果(calledNameDiv) calledNameDiv.textContent="🏆 全班光荣榜n 🏆";
-                如果(calledIdSpan) calledIdSpan.innerHTML="所有同学都已点名完毕，请按「重置状态」继续使用";
-                如果(resultArea) {
-                    resultArea.classList.移除('呼叫动画');
-                    无效的resultArea.offsetWidth;
-                    resultArea.classList.添加('呼叫动画');
+        
+        function callRandomStudent() {
+            if (remainCount === 0) {
+                if(calledNameDiv) calledNameDiv.textContent = "🏆 全班光荣榜 🏆";
+                if(calledIdSpan) calledIdSpan.innerHTML = "所有同学都已点名完毕，请按「重置状态」继续使用";
+                if(resultArea) {
+                    resultArea.classList.remove('call-animate');
+                    void resultArea.offsetWidth;
+                    resultArea.classList.add('call-animate');
                 }
-                返回;
+                return;
             }
-            ConstnotCalled=[];
-            为 (让我=0; 我<calledStatus.长度; 我++) 如果(!calledStatus[我]) notCalled.推(我);
-            如果(notCalled.长度===0) 返回;
-            ConstrandIdx=notCalled[数学.地板(数学.随机() * notCalled.长度)];
-            Const挑选出来的=学生[randIdx];
-            calledStatus[randIdx]=正确;
+            const notCalled = [];
+            for (let i=0; i<calledStatus.length; i++) if(!calledStatus[i]) notCalled.push(i);
+            if(notCalled.length === 0) return;
+            const randIdx = notCalled[Math.floor(Math.random() * notCalled.length)];
+            const selected = students[randIdx];
+            calledStatus[randIdx] = true;
             remainCount--;
             updateStatsUI();
-            displayStudent(挑选出来的);
+            displayStudent(selected);
             miniConfetti();
         }
         
-        功能resetCallStatus() {
-            calledStatus.填满(假的);
-            remainCount=67;
+        function resetCallStatus() {
+            calledStatus.fill(false);
+            remainCount = 67;
             updateStatsUI();
-            如果(calledNameDiv) calledNameDiv.textContent="—— 待点名 ——";
-            如果(calledIdSpan) calledIdSpan.innerHTML="⚡ 点击按钮随机抽选(不重复模式)";
-            如果(resultArea) resultArea.classList.移除('呼叫动画');
-            Const吐司=文件.createElement('div');
-            吐司.textContent="✨ 点名状态已重置，全班67人重新等待点名 ✨";
-            吐司.风格.cssText="位置：固定；底部：20px；左侧：50%；变换：translateX(-50%)；背景：#1e2f3f；颜色：白色；填充：8px22px；边框半径：40px；字体大小：0.9rem；z索引：999；不透明度：0.9；字体粗细：粗体；";
-            文件.身体.appendChild(吐司);
-            setTimeout(()=>{ 吐司.风格.不透明度='0'; setTimeout(()=>吐司.移除(), 500); }, 1600);
+            if(calledNameDiv) calledNameDiv.textContent = "—— 待点名 ——";
+            if(calledIdSpan) calledIdSpan.innerHTML = "⚡ 点击按钮随机抽选 (不重复模式)";
+            if(resultArea) resultArea.classList.remove('call-animate');
+            const toast = document.createElement('div');
+            toast.textContent = "✨ 点名状态已重置，全班67人重新等待点名 ✨";
+            toast.style.cssText = "position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#1e2f3f; color:white; padding:8px 22px; border-radius:40px; font-size:0.9rem; z-index:999; opacity:0.9; font-weight:bold;";
+            document.body.appendChild(toast);
+            setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 500); }, 1600);
         }
         
-        如果(callBtn) callBtn.addEventListener('单击', (E)=>{e.stopPropagation()；callRandomStudent()；})；)=>{ e.stopPropagation(); callRandomStudent(); });
-如果(resetBtn)resetBtn.addEventListener('单击'，(e)=>{e.stopPropagation()；resetCallStatus()；})；
+        if(callBtn) callBtn.addEventListener('click', (e) => { e.stopPropagation(); callRandomStudent(); });
+        if(resetBtn) resetBtn.addEventListener('click', (e) => { e.stopPropagation(); resetCallStatus(); });
         
-updateStatsUI()；
-控制台.日志("点名器已启动 | 高一九班真实67人名单 | 独立界面");
+        updateStatsUI();
+        console.log("点名器已启动 | 高一九班真实67人名单 | 独立界面");
     })();
-</脚本>
-</身体>/身体>
-</超文本标记语言>/超文本标记语言>/超文本标记语言>/超文本标记语言>/超文本标记语言>/超文本标记语言>/超文本标记语言>/超文本标记语言>/超文本标记语言>/超文本标记语言>/超文本标记语言> /超文本标记语言>/超文本标记语言>/超文本标记语言>/超文本标记语言>/超文本标记语言>/超文本标记语言>/超文本标记语言>/超文本标记语言>/超文本标记语言>/超文本标记语言>/超文本标记语言> /超文本标记语言>/超文本标记语言>/超文本标记语言>/超文本标记语言>/超文本标记语言>/超文本标记语言>/超文本标记语言>/超文本标记语言>/超文本标记语言>/超文本标记语言>
-
-
+</script>
+</body>
+</html>
