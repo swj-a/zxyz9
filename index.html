@@ -282,8 +282,8 @@
 <body>
     <!-- 主界面视图 -->
     <div id="mainView" class="view">
-        <h1 id="mainTitle">高一九班</h1>
-        <marquee>高一九班的网页</marquee>
+        <h1 id="mainTitle">高二九班</h1>
+        <marquee>高二九班的网页</marquee>
         <i>“功能有待增加”</i>
         
         <!-- 第一个卡片改为点名器入口按钮 -->
@@ -309,32 +309,32 @@
         </footer>
     </div>
 
-    <!-- 点名器独立界面（初始隐藏） -->
+    <!-- 点名器界面 -->
     <div id="callerView" class="view hidden-view">
         <div style="margin-top: 15px;">
-            <button id="backToMainBtn" class="back-home-btn">🏠 返回主界面</button>
+            <button id="backToMainBtn" class="back-home-btn">返回主界面</button>
         </div>
         
         <div class="call-card" id="callerContainer">
             <div class="call-header">
-                <span>📖</span> 高一九班 · 点名器 <span>🎯</span>
+                <span>📖</span> 高二九班 · 点名器 <span>🎯</span>
             </div>
             <div class="stats-bar">
-                <div>👥 总人数：<strong id="totalCount">67</strong></div>
-                <div>⭐ 未点名：<strong id="remainCount">67</strong></div>
+                <div> 总人数：<strong id="totalCount">67</strong></div>
+                <div> 未点名：<strong id="remainCount">67</strong></div>
             </div>
             <div class="result-area" id="resultArea">
-                <div class="called-label">✨ 本次点名 ✨</div>
+                <div class="called-label"> 本次点名 </div>
                 <div class="called-name" id="calledName">—— 待点名 ——</div>
-                <div class="called-id" id="calledId">⚡ 点击按钮随机抽选（不重复）</div>
+                <div class="called-id" id="calledId"> 点击按钮随机抽选（不重复）</div>
             </div>
             <div class="btn-group">
-                <button class="call-btn" id="callBtn">🎤 随机点名</button>
-                <button class="call-btn reset-btn" id="resetCallBtn">🔄 重置状态</button>
+                <button class="call-btn" id="callBtn"> 随机点名</button>
+                <button class="call-btn reset-btn" id="resetCallBtn"> 重置状态</button>
             </div>
-            <div class="remain-tip" id="remainTip">📌 不重复点名 · 全班轮完可重置</div>
+            <div class="remain-tip" id="remainTip"> 不重复点名 · 全班轮完可重置</div>
         </div>
-        <p style="font-size: 0.8rem; margin-top: 15px; color: #5f7f9e;">✨ 点名记录独立，与主界面互不干扰 ✨</p>
+        <p style="font-size: 0.8rem; margin-top: 15px; color: #5f7f9e;"> 点名记录独立，与主界面互不干扰 </p>
     </div>
 
     <script>
@@ -361,7 +361,6 @@
             showMainView();
         });
         
-        // ========== 主界面原有功能 ==========
         // 点击第二个数字卡片随机变化
         const randomNumBox = document.querySelector('.randomNumBox');
         if(randomNumBox) {
@@ -481,14 +480,14 @@
         function updateStatsUI() {
             if(remainSpan) remainSpan.textContent = remainCount;
             if(remainTipSpan) {
-                if (remainCount === 0) remainTipSpan.innerHTML = '🎉 全班已点完！请按「重置状态」继续点名 🎉';
-                else remainTipSpan.innerHTML = `📌 剩余 ${remainCount} 人未点名 · 不重复轮换`;
+                if (remainCount === 0) remainTipSpan.innerHTML = ' 全班已点完！请按「重置状态」继续点名 ';
+                else remainTipSpan.innerHTML = ` 剩余 ${remainCount} 人未点名 · 不重复轮换`;
             }
         }
         
         function displayStudent(student) {
             if(calledNameDiv) calledNameDiv.textContent = student.name;
-            if(calledIdSpan) calledIdSpan.innerHTML = `📖 学号：${student.id} 号  ·  ${student.name}`;
+            if(calledIdSpan) calledIdSpan.innerHTML = ` 学号：${student.id} 号  ·  ${student.name}`;
             if(resultArea) {
                 resultArea.classList.remove('call-animate');
                 void resultArea.offsetWidth;
@@ -525,7 +524,7 @@
         
         function callRandomStudent() {
             if (remainCount === 0) {
-                if(calledNameDiv) calledNameDiv.textContent = "🏆 全班光荣榜 🏆";
+                if(calledNameDiv) calledNameDiv.textContent = " 全班光荣榜 ";
                 if(calledIdSpan) calledIdSpan.innerHTML = "所有同学都已点名完毕，请按「重置状态」继续使用";
                 if(resultArea) {
                     resultArea.classList.remove('call-animate');
@@ -551,10 +550,10 @@
             remainCount = 67;
             updateStatsUI();
             if(calledNameDiv) calledNameDiv.textContent = "—— 待点名 ——";
-            if(calledIdSpan) calledIdSpan.innerHTML = "⚡ 点击按钮随机抽选 (不重复模式)";
+            if(calledIdSpan) calledIdSpan.innerHTML = " 点击按钮随机抽选 (不重复模式)";
             if(resultArea) resultArea.classList.remove('call-animate');
             const toast = document.createElement('div');
-            toast.textContent = "✨ 点名状态已重置，全班67人重新等待点名 ✨";
+            toast.textContent = " 点名状态已重置，全班67人重新等待点名 ";
             toast.style.cssText = "position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#1e2f3f; color:white; padding:8px 22px; border-radius:40px; font-size:0.9rem; z-index:999; opacity:0.9; font-weight:bold;";
             document.body.appendChild(toast);
             setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 500); }, 1600);
@@ -564,7 +563,7 @@
         if(resetBtn) resetBtn.addEventListener('click', (e) => { e.stopPropagation(); resetCallStatus(); });
         
         updateStatsUI();
-        console.log("点名器已启动 | 高一九班真实67人名单 | 独立界面");
+        console.log("点名器已启动 | 高二九班真实67人名单 | 独立界面");
     })();
 </script>
 </body>
