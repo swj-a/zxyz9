@@ -523,7 +523,7 @@
     </div>
 
     <script>
-        // ========== 界面切换逻辑 ==========
+        // <-- 界面切换逻辑 -->
         const mainView = document.getElementById('mainView');
         const callerView = document.getElementById('callerView');
         const callEntry = document.getElementById('callEntryCard');
@@ -622,9 +622,9 @@
         document.getElementById('colorDisplay').style.backgroundColor = '#f8fafc';
     </script>
     <script>
-    // ========== 点名器独立逻辑（使用真实班级67人名单，不重复点名） ==========
+    //  点名器独立逻辑（不重复点名）
     (function initCaller() {
-        // ----- 高二九班真实名单（共67人）-----
+        // -- 高二九班真实名单（共67人）---
         const nameList = [
             "田海川", "王俊壕", "宋郑坤", "崔洪昊", "王湘砚", "杨锐锋", "毛虎臣", "田雨轩", "邹志涵", "聂子砚",
             "康峻玮", "雷佳烨", "肖雨田", "杨安妮", "孙文君", "黎伊淳", "宋莹慧", "杜宝月", "吕峻熙", "陈俊燃",
@@ -746,7 +746,7 @@
     })();
 </script>
 <script>
-    // ========== 高级功能：男生 / 女生 / 随机数字 / AI ==========
+    //  高级功能：男生 / 女生 / 随机数字 / AI 
     (function initAdvanced() {
         const students = window.dshStudents || [];
         const boyNames = [
