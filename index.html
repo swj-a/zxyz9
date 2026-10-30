@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>高二九班 · 点名器双界面</title>
+    <title>高二九班 · 点名器</title>
     <style>
         * {
             margin: 0;
@@ -78,7 +78,113 @@
             background-color: rgba(25, 118, 210, 0.9);
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
-        
+
+        /* 高级功能入口 */
+        .advanced-entry-btn {
+            background: linear-gradient(135deg, rgba(124, 77, 255, 0.78), rgba(63, 81, 181, 0.9));
+        }
+        .advanced-entry-btn:hover {
+            background: linear-gradient(135deg, rgba(103, 58, 183, 0.92), rgba(48, 63, 159, 0.96));
+        }
+
+        /* 高级功能页 */
+        .advanced-wrap {
+            width: 760px;
+            max-width: 94%;
+            margin: 0 auto;
+        }
+        .advanced-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin: 15px 0 10px;
+        }
+        .advanced-title {
+            font-size: 1.8rem;
+            color: #1f3a6b;
+            margin: 0;
+        }
+        .advanced-subtitle {
+            color: #5f7f9e;
+            margin: 0 0 18px;
+            font-size: 0.95rem;
+        }
+        .advanced-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+        .advanced-card {
+            appearance: none;
+            border: 1px solid rgba(255,255,255,0.75);
+            border-radius: 24px;
+            padding: 22px 18px;
+            text-align: left;
+            cursor: pointer;
+            color: #1f2a44;
+            background: linear-gradient(135deg, rgba(255,255,255,0.94), rgba(238,242,255,0.94));
+            box-shadow: 0 10px 24px rgba(30, 58, 95, 0.12);
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-family: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .advanced-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 28px rgba(30, 58, 95, 0.18);
+        }
+        .advanced-card .advanced-icon {
+            font-size: 2rem;
+            line-height: 1;
+        }
+        .advanced-card .advanced-name {
+            font-size: 1.25rem;
+            font-weight: 800;
+        }
+        .advanced-card .advanced-desc {
+            font-size: 0.85rem;
+            color: #5f7f9e;
+        }
+        .advanced-card.boys { border-top: 5px solid #4f8ef7; }
+        .advanced-card.girls { border-top: 5px solid #f06292; }
+        .advanced-card.number { border-top: 5px solid #f6b73c; }
+        .advanced-card.ai { border-top: 5px solid #7c4dff; }
+        .ai-fallback {
+            margin-top: 16px;
+            font-size: 0.9rem;
+            color: #5f7f9e;
+            line-height: 1.7;
+        }
+        .ai-fallback a {
+            color: #3b5c7a;
+            font-weight: 700;
+        }
+        .group-card { width: 460px; }
+        .group-title { font-size: 1.7rem; }
+        .number-card { width: 380px; }
+        .number-display {
+            font-size: 4.6rem;
+            font-weight: 900;
+            color: #1f3a6b;
+            margin: 18px 0 22px;
+            line-height: 1.1;
+            letter-spacing: 2px;
+        }
+        .number-display.pop {
+            animation: numberPop 0.35s ease;
+        }
+        @keyframes numberPop {
+            0% { transform: scale(0.8); opacity: 0.4; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @media (max-width: 640px) {
+            .advanced-grid { grid-template-columns: 1fr; }
+            .advanced-title { font-size: 1.4rem; }
+            .number-display { font-size: 3.6rem; }
+        }
+
         /* 点名器卡片样式 */
         .call-card {
             width: 420px;
@@ -291,9 +397,9 @@
             <h1 style="color: white; font-weight: bold;">🎲 点名器入口 🎲</h1>
         </div>
         
-        <!-- 第二个数字卡片保留随机数字功能 -->
-        <div class="a">
-            <h1 class="randomNumBox">527</h1>
+        <!-- 第二个卡片：高级功能入口 -->
+        <div class="a call-entry-btn advanced-entry-btn" id="advancedEntryCard">
+            <h1 style="color: white; font-weight: bold;">⚙️ 高级功能 ⚙️</h1>
         </div>
         
         <h1 id="lazyText">懒得做了</h1>
@@ -305,7 +411,7 @@
         </div>
         
         <footer>
-            <p>彩蛋如下：双击标题改变背景色 | 点击数字随机变化 | 鼠标悬停显示反骨 | 按键文字抖动</p>
+            <p>彩蛋如下：双击标题改变背景色 | 点击“高级功能”进入工具区 | 鼠标悬停显示反骨 | 按键文字抖动</p>
         </footer>
     </div>
 
@@ -337,6 +443,85 @@
         <p style="font-size: 0.8rem; margin-top: 15px; color: #5f7f9e;"> 点名记录独立，与主界面互不干扰 </p>
     </div>
 
+    <!-- 高级功能界面 -->
+    <div id="advancedView" class="view hidden-view">
+        <div class="advanced-wrap">
+            <div class="advanced-topbar">
+                <button id="backFromAdvancedBtn" class="back-home-btn">返回主界面</button>
+                <h1 class="advanced-title">高级功能</h1>
+            </div>
+            <p class="advanced-subtitle">选择要使用的工具</p>
+            <div class="advanced-grid">
+                <button class="advanced-card boys" id="boysEntryBtn" type="button">
+                    <span class="advanced-icon">👦</span>
+                    <span class="advanced-name">男生专区</span>
+                    <span class="advanced-desc" id="boysCountDesc">不重复点名</span>
+                </button>
+                <button class="advanced-card girls" id="girlsEntryBtn" type="button">
+                    <span class="advanced-icon">👧</span>
+                    <span class="advanced-name">女生专区</span>
+                    <span class="advanced-desc" id="girlsCountDesc">不重复点名</span>
+                </button>
+                <button class="advanced-card number" id="randomNumberEntryBtn" type="button">
+                    <span class="advanced-icon">🔢</span>
+                    <span class="advanced-name">1~100 随机数字</span>
+                    <span class="advanced-desc">生成一个 1 到 100 的整数</span>
+                </button>
+                <button class="advanced-card ai" id="aiEntryBtn" type="button">
+                    <span class="advanced-icon">🤖</span>
+                    <span class="advanced-name">询问 AI</span>
+                    <span class="advanced-desc">无需登录 · DuckDuckGo AI Chat</span>
+                </button>
+            </div>
+            <p class="ai-fallback">
+                询问 AI 会打开 DuckDuckGo AI Chat（无需登录）。<br>
+                如果按钮没有反应，可以直接点这里：
+                <a href="https://duck.ai/" target="_blank" rel="noopener">打开 DuckDuckGo AI</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- 男生 / 女生专区共用界面 -->
+    <div id="groupView" class="view hidden-view">
+        <div style="margin-top: 15px;">
+            <button id="backFromGroupBtn" class="back-home-btn">返回高级功能</button>
+        </div>
+        <div class="call-card group-card">
+            <div class="call-header group-title">
+                <span id="groupIcon">👦</span> <span id="groupTitle">男生专区</span> <span>🎯</span>
+            </div>
+            <div class="stats-bar">
+                <div>总人数：<strong id="groupTotal">0</strong></div>
+                <div>未点名：<strong id="groupRemain">0</strong></div>
+            </div>
+            <div class="result-area" id="groupResultArea">
+                <div class="called-label">本次点名</div>
+                <div class="called-name group-name" id="groupCalledName">—— 待点名 ——</div>
+                <div class="called-id" id="groupCalledId">点击按钮随机抽选（不重复）</div>
+            </div>
+            <div class="btn-group">
+                <button class="call-btn" id="groupCallBtn">随机点名</button>
+                <button class="call-btn reset-btn" id="groupResetBtn">重置状态</button>
+            </div>
+            <div class="remain-tip" id="groupRemainTip">不重复点名</div>
+        </div>
+    </div>
+
+    <!-- 1~100 随机数字界面 -->
+    <div id="numberView" class="view hidden-view">
+        <div style="margin-top: 15px;">
+            <button id="backFromNumberBtn" class="back-home-btn">返回高级功能</button>
+        </div>
+        <div class="call-card number-card">
+            <div class="call-header">🔢 1~100 随机数字</div>
+            <div class="number-display" id="randomNumberDisplay">--</div>
+            <div class="btn-group">
+                <button class="call-btn" id="randomNumberBtn">生成随机数</button>
+            </div>
+            <div class="remain-tip" id="numberTip">每次生成一个 1 到 100 的整数</div>
+        </div>
+    </div>
+
     <script>
         // ========== 界面切换逻辑 ==========
         const mainView = document.getElementById('mainView');
@@ -344,14 +529,19 @@
         const callEntry = document.getElementById('callEntryCard');
         const backBtn = document.getElementById('backToMainBtn');
         
+        const allViews = document.querySelectorAll('.view');
+        function showOnlyView(viewId) {
+            allViews.forEach(view => {
+                view.classList.toggle('hidden-view', view.id !== viewId);
+            });
+        }
         function showCallerView() {
-            mainView.classList.add('hidden-view');
-            callerView.classList.remove('hidden-view');
+            showOnlyView('callerView');
         }
         function showMainView() {
-            mainView.classList.remove('hidden-view');
-            callerView.classList.add('hidden-view');
+            showOnlyView('mainView');
         }
+        window.showOnlyView = showOnlyView;
         
         callEntry.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -360,20 +550,6 @@
         if(backBtn) backBtn.addEventListener('click', () => {
             showMainView();
         });
-        
-        // 点击第二个数字卡片随机变化
-        const randomNumBox = document.querySelector('.randomNumBox');
-        if(randomNumBox) {
-            randomNumBox.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const randomNum = Math.floor(Math.random() * 900) + 100;
-                randomNumBox.textContent = randomNum;
-                randomNumBox.style.transform = 'scale(1.2)';
-                setTimeout(() => {
-                    randomNumBox.style.transform = 'scale(1)';
-                }, 300);
-            });
-        }
         
         // 双击标题变色
         const mainTitle = document.querySelector('#mainTitle');
@@ -465,8 +641,8 @@
             name: name
         }));
         
-        let calledStatus = new Array(67).fill(false);
-        let remainCount = 67;
+        let calledStatus = new Array(students.length).fill(false);
+        let remainCount = students.length;
         
         const totalSpan = document.getElementById('totalCount');
         const remainSpan = document.getElementById('remainCount');
@@ -499,9 +675,9 @@
             }
         }
         
-        function miniConfetti() {
-            if(!resultArea) return;
-            const rect = resultArea.getBoundingClientRect();
+        function miniConfetti(area = resultArea) {
+            if(!area) return;
+            const rect = area.getBoundingClientRect();
             const x = rect.left + rect.width/2;
             const y = rect.top + rect.height/2;
             for(let i=0;i<12;i++) {
@@ -547,13 +723,13 @@
         
         function resetCallStatus() {
             calledStatus.fill(false);
-            remainCount = 67;
+            remainCount = students.length;
             updateStatsUI();
             if(calledNameDiv) calledNameDiv.textContent = "—— 待点名 ——";
             if(calledIdSpan) calledIdSpan.innerHTML = " 点击按钮随机抽选 (不重复模式)";
             if(resultArea) resultArea.classList.remove('call-animate');
             const toast = document.createElement('div');
-            toast.textContent = " 点名状态已重置，全班67人重新等待点名 ";
+            toast.textContent = ` 点名状态已重置，全班${students.length}人重新等待点名 `;
             toast.style.cssText = "position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#1e2f3f; color:white; padding:8px 22px; border-radius:40px; font-size:0.9rem; z-index:999; opacity:0.9; font-weight:bold;";
             document.body.appendChild(toast);
             setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 500); }, 1600);
@@ -562,8 +738,205 @@
         if(callBtn) callBtn.addEventListener('click', (e) => { e.stopPropagation(); callRandomStudent(); });
         if(resetBtn) resetBtn.addEventListener('click', (e) => { e.stopPropagation(); resetCallStatus(); });
         
+        if(totalSpan) totalSpan.textContent = students.length;
         updateStatsUI();
+        window.dshStudents = students;
+        window.dshBurstConfetti = miniConfetti;
         console.log("点名器已启动 | 高二九班真实67人名单 | 独立界面");
+    })();
+</script>
+<script>
+    // ========== 高级功能：男生 / 女生 / 随机数字 / AI ==========
+    (function initAdvanced() {
+        const students = window.dshStudents || [];
+        const boyNames = [
+            "田海川", "王俊壕", "宋郑坤", "崔洪昊", "杨锐锋", "毛虎臣", "邹志涵", "康峻玮", "雷佳烨", "肖雨田",
+            "孙文君", "黎伊淳", "吕峻熙", "陈俊燃", "李浩宇", "孔睿浩", "邓昌君", "刘博亚", "闫开翎", "王梓轩",
+            "邹景晨", "孔文浩", "王高涵", "周志恒", "刘亦潇", "袁潇航", "曾国轩", "李泽嵩", "程锋杨", "鄢先弘",
+            "康靖宇", "宋清洋", "王博", "刘煜哲", "张哲铭", "李鸿文", "崔哲宇"
+        ];
+        const boySet = new Set(boyNames);
+        const boys = students.filter(student => boySet.has(student.name));
+        const girls = students.filter(student => !boySet.has(student.name));
+        const missing = boyNames.filter(name => !students.some(student => student.name === name));
+        if (missing.length > 0) {
+            console.warn("男生名单里这些名字没有在班级名单中找到：", missing);
+        }
+
+        const groups = {
+            boys: { title: "男生专区", icon: "👦", students: boys, called: null, remain: 0, current: null },
+            girls: { title: "女生专区", icon: "👧", students: girls, called: null, remain: 0, current: null }
+        };
+        let activeGroupKey = null;
+
+        const byId = (id) => document.getElementById(id);
+        const groupTitle = byId("groupTitle");
+        const groupIcon = byId("groupIcon");
+        const groupTotal = byId("groupTotal");
+        const groupRemain = byId("groupRemain");
+        const groupCalledName = byId("groupCalledName");
+        const groupCalledId = byId("groupCalledId");
+        const groupRemainTip = byId("groupRemainTip");
+        const groupResultArea = byId("groupResultArea");
+
+        function showToast(message) {
+            const toast = document.createElement("div");
+            toast.textContent = message;
+            toast.style.cssText = "position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#1e2f3f; color:white; padding:8px 22px; border-radius:40px; font-size:0.9rem; z-index:999; opacity:0.9; font-weight:bold;";
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = "0";
+                setTimeout(() => toast.remove(), 500);
+            }, 1600);
+        }
+
+        function ensureGroup(group) {
+            if (group.called === null) {
+                group.called = new Array(group.students.length).fill(false);
+                group.remain = group.students.length;
+                group.current = null;
+            }
+        }
+
+        function renderGroup() {
+            const group = groups[activeGroupKey];
+            if (!group) return;
+            groupTitle.textContent = group.title;
+            groupIcon.textContent = group.icon;
+            groupTotal.textContent = group.students.length;
+            groupRemain.textContent = group.remain;
+
+            if (group.students.length === 0) {
+                groupCalledName.textContent = "暂无名单";
+                groupCalledId.textContent = "这个分组还没有学生";
+                groupRemainTip.textContent = "请检查名单";
+                return;
+            }
+
+            if (group.current) {
+                groupCalledName.textContent = group.current.name;
+                groupCalledId.textContent = `学号：${group.current.id} 号 · ${group.current.name}`;
+            } else {
+                groupCalledName.textContent = "—— 待点名 ——";
+                groupCalledId.textContent = "点击按钮随机抽选（不重复）";
+            }
+
+            groupRemainTip.textContent = group.remain === 0
+                ? "本组已全部点完！请按「重置状态」继续"
+                : `剩余 ${group.remain} 人未点名 · 不重复轮换`;
+        }
+
+        function openGroup(key) {
+            activeGroupKey = key;
+            ensureGroup(groups[key]);
+            window.showOnlyView("groupView");
+            renderGroup();
+        }
+
+        function callGroupStudent() {
+            const group = groups[activeGroupKey];
+            if (!group) return;
+
+            if (group.remain === 0) {
+                groupCalledName.textContent = group.students.length === 0 ? "暂无名单" : "本组光荣榜";
+                groupCalledId.textContent = group.students.length === 0
+                    ? "这个分组还没有学生"
+                    : "所有同学都已点名完毕，请按「重置状态」继续使用";
+                groupResultArea.classList.remove("call-animate");
+                void groupResultArea.offsetWidth;
+                groupResultArea.classList.add("call-animate");
+                return;
+            }
+
+            const notCalled = [];
+            for (let i = 0; i < group.called.length; i++) {
+                if (!group.called[i]) notCalled.push(i);
+            }
+            if (notCalled.length === 0) return;
+
+            const index = notCalled[Math.floor(Math.random() * notCalled.length)];
+            group.called[index] = true;
+            group.remain--;
+            group.current = group.students[index];
+            renderGroup();
+
+            groupResultArea.classList.remove("call-animate");
+            void groupResultArea.offsetWidth;
+            groupResultArea.classList.add("call-animate");
+            if (window.dshBurstConfetti) window.dshBurstConfetti(groupResultArea);
+        }
+
+        function resetGroup() {
+            const group = groups[activeGroupKey];
+            if (!group) return;
+            group.called.fill(false);
+            group.remain = group.students.length;
+            group.current = null;
+            renderGroup();
+            showToast(`${group.title}已重置，共 ${group.students.length} 人`);
+        }
+
+        function generateRandomNumber() {
+            const number = Math.floor(Math.random() * 100) + 1;
+            const display = byId("randomNumberDisplay");
+            display.textContent = number;
+            display.classList.remove("pop");
+            void display.offsetWidth;
+            display.classList.add("pop");
+            byId("numberTip").textContent = `刚生成：${number}（范围 1~100）`;
+        }
+
+        function openAI() {
+            const win = window.open("https://duck.ai/", "_blank");
+            if (win) {
+                try { win.opener = null; } catch (error) { /* 忽略浏览器限制 */ }
+            }
+        }
+
+        byId("boysCountDesc").textContent = `${boys.length} 人 · 不重复点名`;
+        byId("girlsCountDesc").textContent = `${girls.length} 人 · 不重复点名`;
+
+        byId("advancedEntryCard").addEventListener("click", (event) => {
+            event.stopPropagation();
+            window.showOnlyView("advancedView");
+        });
+        byId("backFromAdvancedBtn").addEventListener("click", () => {
+            window.showOnlyView("mainView");
+        });
+        byId("boysEntryBtn").addEventListener("click", (event) => {
+            event.stopPropagation();
+            openGroup("boys");
+        });
+        byId("girlsEntryBtn").addEventListener("click", (event) => {
+            event.stopPropagation();
+            openGroup("girls");
+        });
+        byId("randomNumberEntryBtn").addEventListener("click", (event) => {
+            event.stopPropagation();
+            window.showOnlyView("numberView");
+        });
+        byId("aiEntryBtn").addEventListener("click", (event) => {
+            event.stopPropagation();
+            openAI();
+        });
+        byId("backFromGroupBtn").addEventListener("click", () => {
+            window.showOnlyView("advancedView");
+        });
+        byId("backFromNumberBtn").addEventListener("click", () => {
+            window.showOnlyView("advancedView");
+        });
+        byId("groupCallBtn").addEventListener("click", (event) => {
+            event.stopPropagation();
+            callGroupStudent();
+        });
+        byId("groupResetBtn").addEventListener("click", (event) => {
+            event.stopPropagation();
+            resetGroup();
+        });
+        byId("randomNumberBtn").addEventListener("click", (event) => {
+            event.stopPropagation();
+            generateRandomNumber();
+        });
     })();
 </script>
 </body>
